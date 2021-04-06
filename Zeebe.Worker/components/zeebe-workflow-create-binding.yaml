@@ -1,0 +1,15 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: create
+  namespace: default
+spec:
+  type: bindings.zeebe.workflow
+  version: v1
+  metadata:
+    - name: gatewayAddr
+      value: localhost:1234
+    - name: gatewayKeepAlive
+      value: 45s
+    - name: usePlainTextConnection
+      value: true

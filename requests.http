@@ -1,0 +1,4 @@
+POST http://localhost:5000/calc
+Content-Type: application/json
+
+{ "operator": "+", "firstOperand": 1.1, "secondOperand": 2.4 }
