@@ -8,8 +8,45 @@ currently in development. The progress can be monitored in the following repo: h
 
 ## Prerequisites
 
+There are two possibilities to run Zeebe locally:
+
+- Run Zeebe with Kubernetes
+- Run Zeebe with Docker
+
+For development purpose it's easier to run Zeebe with docker. For testing Zeebe with the developed services it makes sense to test it all in Kubernetes.
+
+## Docker installation
+
+Camunda provides the [zeebe-docker-compose] repository with different docker compose configurations. We use the `operate-simple-monitor` configuration, which is 
+good for development purposes. It provides the [Operate] UI as also the [Zeebe Simple Monitor] tool.
+
+The following tools need to be installed on the local developer machine. Please refer to the documentation of these tools to learn how to
+install them.
+- [Docker]
+- [Docker compose]
+
+The following commands must be executed to run Zeebe:
+
+```bash
+git clone https://github.com/zeebe-io/zeebe-docker-compose.git
+cd zeebe-docker-compose/operate-simple-monitor
+docker-compose up
+```
+
+After all all services are started the following URIs can be used:
+
+| Tool                   | URI                    |
+|------------------------|------------------------|
+| Zeebe Simple Monitor   | http://localhost:8082  |
+| Operate                | http://localhost:8080  |
+| Zeebe Gateway          | localhost:26500        |
+
+## Kubernetes installation
+
 The following tools need to be installed on the local developer machine. Please refer to the documentation of these tools to learn how to 
 install them.
+- [Docker]
+- [k3d]  
 - [Helm]
 - [Dapr]
 - [kubectl]
@@ -77,8 +114,19 @@ zeebe-cluster-zeebe-gateway-7fdf747878-jr9tp                   1/1     Running  
 
 Now we are able to access the [Operate] UI over `https://localhost:8443` and login with user `demo` and password `demo`.
 
+# Run the worker service
+
+The following command will run the service `Zeebe.Worker` with dapr. The repo contains some example requests in the `requests.http` file, 
+which can be executed against the service.
+
+```bash
+dapr run --app-id zeebe-worker --app-port 5000 --dapr-http-port 5001 --components-path ./Zeebe.Worker/components -- dotnet run --project "./Zeebe.Worker/Zeebe.Worker.csproj"
+```
+
 [Zeebe]: https://zeebe.io/
 [Zeebe Helm]: https://helm.zeebe.io
+[Zeebe Simple Monitor]: https://github.com/camunda-community-hub/zeebe-simple-monitor
+[zeebe-docker-compose]: https://github.com/zeebe-io/zeebe-docker-compose
 [Operate]: https://docs.zeebe.io/operate-user-guide/index.html
 [Elasticsearch]: https://www.elastic.co/de/elasticsearch/
 [Dapr]: https://dapr.io/
@@ -90,5 +138,7 @@ Now we are able to access the [Operate] UI over `https://localhost:8443` and log
 [minikube]: https://minikube.sigs.k8s.io/
 [microk8s]: https://microk8s.io/
 [kind]: https://kind.sigs.k8s.io/
+[Docker]: https://www.docker.com/
+[Docker Compose]: https://docs.docker.com/compose/
 [Docker Desktop]: https://docs.docker.com/docker-for-windows/install/
 [k3d installation page]: https://k3d.io/#installation

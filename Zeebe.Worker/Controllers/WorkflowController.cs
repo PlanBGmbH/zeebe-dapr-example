@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Dapr.Client;
@@ -23,9 +24,12 @@ namespace Zeebe.Worker.Controllers
         [HttpPost("/deploy")]
         public async Task<DeployResponse> Deploy([FromForm] DeployRequest request)
         {
-            var readonlyMemory = new ReadOnlyMemory<byte>();
-            await request.FileContent.OpenReadStream().WriteAsync(readonlyMemory);
-            var bindingRequest = new BindingRequest("workflow-deploy", "deploy") { Data = readonlyMemory };
+            using var memoryStream = new MemoryStream();
+            await request.FileContent.OpenReadStream().CopyToAsync(memoryStream);
+            var bindingRequest = new BindingRequest("workflow-deploy", "deploy")
+            {
+                Data = memoryStream.ToArray().AsMemory()
+            };
             bindingRequest.Metadata.Add("fileName", request.FileName);
             bindingRequest.Metadata.Add("fileType", request.FileType);
 

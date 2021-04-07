@@ -1,4 +1,28 @@
-POST http://localhost:5000/calc
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/deploy
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="fileContent"; filename="workflow.bpmn"
+
+< ./Zeebe.Worker/workflow.bpmn
+--WebAppBoundary--
+
+--WebAppBoundary
+Content-Disposition: form-data; name="fileName"
+
+workflow.bpmn
+--WebAppBoundary--
+
+--WebAppBoundary
+Content-Disposition: form-data; name="fileType"
+
+bpmn
+--WebAppBoundary--
+
+###
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/calc
 Content-Type: application/json
 
 { "operator": "+", "firstOperand": 1.1, "secondOperand": 2.4 }
+
+###

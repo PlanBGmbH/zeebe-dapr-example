@@ -8,7 +8,7 @@ spec:
   version: v1
   metadata:
     - name: gatewayAddr
-      value: localhost:1234
+      value: localhost:26500
     - name: gatewayKeepAlive
       value: 45s
     - name: usePlainTextConnection
