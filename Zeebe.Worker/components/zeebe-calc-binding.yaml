@@ -20,7 +20,7 @@ spec:
     - name: requestTimeout
       value: 15s
     - name: jobType
-      value: calculator
+      value: calc
     - name: maxJobsActive
       value: 32
     - name: concurrency
@@ -29,3 +29,5 @@ spec:
       value: 100ms
     - name: pollThreshold
       value: 0.3
+    - name: fetchVariables
+      value: operator, firstOperand, secondOperand

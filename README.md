@@ -2,20 +2,33 @@
 
 An example that allows to orchestrate [Dapr] microservices with the [Zeebe] workflow engine.
 
-This example will contain some .NET microservices that will be orchestrated with the [Zeebe] workflow engine. The example will use
+This example will contain a .NET microservices that will be orchestrated with the [Zeebe] workflow engine. The example will use
 the new [Dapr input/output bindings](https://docs.dapr.io/developing-applications/building-blocks/bindings/) for Zeebe, which is 
 currently in development. The progress can be monitored in the following repo: https://github.com/akkie/components-contrib/tree/zeebe-bindings/bindings/zeebe
 
-## Prerequisites
+The repository contains a simple Zeebe [BPMN] process
+![Alt text](workflow.png?raw=true "Calc workflow")
 
-There are two possibilities to run Zeebe locally:
+The microservice contains the following endpoints:
+
+| Endpoint          | Description                                                              |
+|-------------------|--------------------------------------------------------------------------|
+| `workflow/deploy` | Deploys a workflow to the Zeebe workflow engine                          |
+| `workflow/create` | Creates an instance of a deployed workflow in the Zeebe workflow engine  |
+| `workflow/cancel` | Cancels a started workflow instance in the Zeebe workflow engine         |
+| `message/publish` | Publishes a message to the Zeebe workflow engine                         |
+| `calc`            | Worker implementation that will be executed by the Zeebe workflow engine |
+
+## Setup Zeebe
+
+There are two possibilities to setup Zeebe locally:
 
 - Run Zeebe with Kubernetes
 - Run Zeebe with Docker
 
 For development purpose it's easier to run Zeebe with docker. For testing Zeebe with the developed services it makes sense to test it all in Kubernetes.
 
-## Docker installation
+### Docker installation
 
 Camunda provides the [zeebe-docker-compose] repository with different docker compose configurations. We use the `operate-simple-monitor` configuration, which is 
 good for development purposes. It provides the [Operate] UI as also the [Zeebe Simple Monitor] tool.
@@ -41,7 +54,7 @@ After all all services are started the following URIs can be used:
 | Operate                | http://localhost:8080  |
 | Zeebe Gateway          | localhost:26500        |
 
-## Kubernetes installation
+### Kubernetes installation
 
 The following tools need to be installed on the local developer machine. Please refer to the documentation of these tools to learn how to 
 install them.
@@ -57,7 +70,7 @@ This example will use [k3d] which is a lightweight wrapper to run [k3s] (Rancher
 **Note**: If you already have a local cluster or if you prefer to use another local Kubernetes distribution like [minikube], [microk8s], [kind] or
 [Docker Desktop], please jump to [Install Zeebe into the cluster](#install-zeebe-into-the-cluster).
 
-### Install k3d and spin up cluster
+#### Install k3d and spin up cluster
 
 The installation process for various operating systems is described in the [k3d installation page]. After k3d was installed, we create 
 a new cluster. The cluster needs at least three nodes because the [Operate] instance that we later install with [Zeebe], installs an 
@@ -73,7 +86,7 @@ k3d cluster create zeebe \
     -p 8443:443@loadbalancer
 ```
 
-### Install Zeebe into the cluster
+#### Install Zeebe into the cluster
 
 Zeebe provides a [Helm] chart that deploys a complete [Zeebe] Cluster, the Operate UI and an ingress controller to [Kubernetes]. To use this 
 helm chart we must add the official [Zeebe Helm] repo to [Helm]:
@@ -122,7 +135,7 @@ which can be executed against the service.
 ```bash
 dapr run --app-id zeebe-worker --app-port 5000 --dapr-http-port 5001 --components-path ./Zeebe.Worker/components -- dotnet run --project "./Zeebe.Worker/Zeebe.Worker.csproj"
 ```
-
+[BPMN]: https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation
 [Zeebe]: https://zeebe.io/
 [Zeebe Helm]: https://helm.zeebe.io
 [Zeebe Simple Monitor]: https://github.com/camunda-community-hub/zeebe-simple-monitor

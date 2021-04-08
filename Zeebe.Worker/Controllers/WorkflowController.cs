@@ -21,17 +21,17 @@ namespace Zeebe.Worker.Controllers
             _daprClient = daprClient;
         }
 
-        [HttpPost("/deploy")]
+        [HttpPost("deploy")]
         public async Task<DeployResponse> Deploy([FromForm] DeployRequest request)
         {
-            using var memoryStream = new MemoryStream();
+            await using var memoryStream = new MemoryStream();
             await request.FileContent.OpenReadStream().CopyToAsync(memoryStream);
-            var bindingRequest = new BindingRequest("workflow-deploy", "deploy")
+            var bindingRequest = new BindingRequest("workflow", "deploy")
             {
                 Data = memoryStream.ToArray().AsMemory()
             };
             bindingRequest.Metadata.Add("fileName", request.FileName);
-            bindingRequest.Metadata.Add("fileType", request.FileType);
+            if (request.FileType != null) bindingRequest.Metadata.Add("fileType", request.FileType);
 
             var bindingResponse = await _daprClient.InvokeBindingAsync(bindingRequest);
             var responseJson = await JsonSerializer.DeserializeAsync<DeployResponse>(
@@ -40,10 +40,28 @@ namespace Zeebe.Worker.Controllers
             return responseJson;
         }
 
-        [HttpPost("/create")]
-        public async Task<CreateResponse> Create([FromBody] CreateRequest request)
+        [HttpPost("create")]
+        public async Task<ActionResult> Create([FromBody] CreateRequest request)
         {
-            return await _daprClient.InvokeBindingAsync<CreateRequest, CreateResponse>("workflow-create", "create", request);
+            if (request.BpmnProcessId == null && request.WorkflowKey == null)
+            {
+                return BadRequest(new
+                {
+                    error = "Either a bpmnProcessId or a workflowKey must be given"
+                });
+            }
+
+            var result = await _daprClient.InvokeBindingAsync<CreateRequest, CreateResponse>("workflow", "create", request);
+
+            return Ok(result);
+        }
+
+        [HttpPost("cancel")]
+        public async Task<NoContentResult> Cancel([FromBody] CancelRequest request)
+        {
+            await _daprClient.InvokeBindingAsync("workflow", "cancel", request);
+
+            return NoContent();
         }
     }
 }

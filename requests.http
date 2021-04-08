@@ -1,10 +1,12 @@
-POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/deploy
+### Deploy a workflow file with a file type
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/workflow/deploy
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
 Content-Disposition: form-data; name="fileContent"; filename="workflow.bpmn"
 
-< ./Zeebe.Worker/workflow.bpmn
+< ./workflow.bpmn
 --WebAppBoundary--
 
 --WebAppBoundary
@@ -19,10 +21,111 @@ Content-Disposition: form-data; name="fileType"
 bpmn
 --WebAppBoundary--
 
-###
+### Deploy a workflow file without a file type
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/workflow/deploy
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="fileContent"; filename="workflow.bpmn"
+
+< ./workflow.bpmn
+--WebAppBoundary--
+
+--WebAppBoundary
+Content-Disposition: form-data; name="fileName"
+
+workflow.bpmn
+--WebAppBoundary--
+
+### Create a workflow for process Id (latest)
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/workflow/create
+Content-Type: application/json
+
+{
+  "bpmnProcessId": "zeebe-test",
+  "variables": {
+    "operator": "+",
+    "firstOperand": "1",
+    "secondOperand": "1"
+  }
+}
+
+### Create a workflow for process Id (version 1)
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/workflow/create
+Content-Type: application/json
+
+{
+  "bpmnProcessId": "zeebe-test",
+  "version": 1,
+  "variables": {
+    "operator": "+",
+    "firstOperand": "1",
+    "secondOperand": "1"
+  }
+}
+
+### Create a workflow for a key
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/workflow/create
+Content-Type: application/json
+
+{
+  "workflowKey": 2251799813685632,
+  "variables": {
+    "operator": "+",
+    "firstOperand": "1",
+    "secondOperand": "1"
+  }
+}
+
+### Cancel a workflow
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/workflow/cancel
+Content-Type: application/json
+
+{
+  "workflowInstanceKey": 2251799813685739
+}
+
+### Start calculation with message
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/message/publish
+Content-Type: application/json
+
+{
+  "messageName": "start-calc",
+  "correlationKey": "",
+  "timeToLive": "1m",
+  "variables": {
+    "operator": "+",
+    "firstOperand": "1",
+    "secondOperand": "1"
+  }
+}
+
+### Finish calculation by sending message with result
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/message/publish
+Content-Type: application/json
+
+{
+  "messageName": "finish-calc",
+  "correlationKey": "2",
+  "timeToLive": "1m"
+}
+
+### Call the calc endpoint directly
+
 POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/calc
 Content-Type: application/json
 
-{ "operator": "+", "firstOperand": 1.1, "secondOperand": 2.4 }
+{
+  "operator": "+",
+  "firstOperand": 1.1,
+  "secondOperand": 2.4
+}
 
 ###

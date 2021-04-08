@@ -1,7 +1,7 @@
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: workflow-deploy
+  name: workflow
   namespace: default
 spec:
   type: bindings.zeebe.workflow
