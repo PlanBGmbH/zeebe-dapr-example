@@ -1,15 +1,10 @@
 using System.Collections.Generic;
 
-namespace Zeebe.Worker.Models
+namespace Zeebe.Worker.Models.Workflow
 {
-    public class CreateRequest
-    {
-        public string BpmnProcessId { get; set; }
-
-        public long? WorkflowKey { get; set; }
-
-        public short? Version { get; set; }
-
-        public Dictionary<string, string> Variables { get; set; }
-    }
+    public record CreateRequest(
+        string BpmnProcessId,
+        long? WorkflowKey,
+        short? Version,
+        Dictionary<string, string> Variables);
 }

@@ -1,7 +1,10 @@
 ﻿using System.Threading.Tasks;
+
 using Dapr.Client;
+
 using Microsoft.AspNetCore.Mvc;
-using Zeebe.Worker.Models;
+
+using Zeebe.Worker.Models.Message;
 
 namespace Zeebe.Worker.Controllers
 {

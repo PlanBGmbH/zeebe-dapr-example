@@ -1,7 +1,4 @@
-namespace Zeebe.Worker.Models
+namespace Zeebe.Worker.Models.Message
 {
-    public class PublishResponse
-    {
-        public long Key { get; set; }
-    }
+    public record PublishResponse(long Key);
 }

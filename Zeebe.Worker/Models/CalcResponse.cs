@@ -1,9 +1,4 @@
-using System;
-
 namespace Zeebe.Worker.Models
 {
-    public class CalcResponse
-    {
-        public Double Result { get; set; }
-    }
+    public record CalcResponse(double Result);
 }

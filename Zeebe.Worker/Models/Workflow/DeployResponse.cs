@@ -1,22 +1,12 @@
 using System.Collections.Generic;
 
-namespace Zeebe.Worker.Models
+namespace Zeebe.Worker.Models.Workflow
 {
-    public class DeployResponse
-    {
-        public long Key { get; set; }
+    public record DeployResponse(long Key, IList<DeployResponseWorkflow> Workflows);
 
-        public IList<DeploResponseWorkflow> Workflows { get; set; }
-    }
-
-    public class DeploResponseWorkflow
-    {
-        public string BpmnProcessId { get; set; }
-
-        public short Version { get; set; }
-
-        public long WorkflowKey { get; set; }
-
-        public string ResourceName { get; set; }
-    }
+    public record DeployResponseWorkflow(
+        string BpmnProcessId,
+        short Version,
+        long WorkflowKey,
+        string ResourceName);
 }

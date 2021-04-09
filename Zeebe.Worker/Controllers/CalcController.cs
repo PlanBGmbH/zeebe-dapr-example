@@ -1,5 +1,7 @@
 ﻿using System;
+
 using Microsoft.AspNetCore.Mvc;
+
 using Zeebe.Worker.Models;
 
 namespace Zeebe.Worker.Controllers
@@ -15,17 +17,17 @@ namespace Zeebe.Worker.Controllers
         [HttpPost("/calc")]
         public CalcResponse Calc([FromBody] CalcRequest request)
         {
-            return new()
+            var (@operator, firstOperand, secondOperand) = request;
+            var first = firstOperand.GetValueOrDefault();
+            var second = secondOperand.GetValueOrDefault();
+            return new CalcResponse(@operator switch
             {
-                Result = request.Operator switch
-                {
-                    "+" => request.FirstOperand.GetValueOrDefault() + request.SecondOperand.GetValueOrDefault(),
-                    "-" => request.FirstOperand.GetValueOrDefault() - request.SecondOperand.GetValueOrDefault(),
-                    "/" => request.FirstOperand.GetValueOrDefault() / request.SecondOperand.GetValueOrDefault(),
-                    "*" => request.FirstOperand.GetValueOrDefault() * request.SecondOperand.GetValueOrDefault(),
-                    _ => throw new InvalidOperationException($"Operator {request.Operator} isn't supported")
-                }
-            };
+                "+" => first + second,
+                "-" => first - second,
+                "/" => first / second,
+                "*" => first * second,
+                _ => throw new InvalidOperationException($"Operator {@operator} isn't supported")
+            });
         }
     }
 }

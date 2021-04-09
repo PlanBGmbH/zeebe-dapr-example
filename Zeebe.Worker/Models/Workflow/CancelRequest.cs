@@ -1,10 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Zeebe.Worker.Models
+namespace Zeebe.Worker.Models.Workflow
 {
-    public class CancelRequest
-    {
-        [Required]
-        public long? WorkflowInstanceKey { get; set; }
-    }
+    public record CancelRequest([Required] long? WorkflowInstanceKey);
 }

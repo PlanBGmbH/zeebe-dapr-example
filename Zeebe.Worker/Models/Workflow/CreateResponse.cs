@@ -1,13 +1,8 @@
-namespace Zeebe.Worker.Models
+namespace Zeebe.Worker.Models.Workflow
 {
-    public class CreateResponse
-    {
-        public long? WorkflowKey { get; set; }
-
-        public string BpmnProcessId { get; set; }
-
-        public short? Version { get; set; }
-
-        public long? WorkflowInstanceKey { get; set; }
-    }
+    public record CreateResponse(
+        long? WorkflowKey,
+        string BpmnProcessId,
+        short? Version,
+        long? WorkflowInstanceKey);
 }

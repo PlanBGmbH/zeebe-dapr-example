@@ -1,17 +1,9 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Zeebe.Worker.Models
 {
-    public class CalcRequest
-    {
-        [Required]
-        public string Operator { get; set; }
-
-        [Required]
-        public Double? FirstOperand { get; set; }
-
-        [Required]
-        public Double? SecondOperand { get; set; }
-    }
+    public record CalcRequest(
+        [Required] string Operator,
+        [Required] double? FirstOperand,
+        [Required] double? SecondOperand);
 }

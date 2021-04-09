@@ -97,7 +97,6 @@ Content-Type: application/json
 
 {
   "messageName": "start-calc",
-  "correlationKey": "",
   "timeToLive": "1m",
   "variables": {
     "operator": "+",

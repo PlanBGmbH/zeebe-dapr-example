@@ -2,10 +2,13 @@
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+
 using Dapr.Client;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Toolkit.HighPerformance;
-using Zeebe.Worker.Models;
+
+using Zeebe.Worker.Models.Workflow;
 using Zeebe.Worker.Utils;
 
 namespace Zeebe.Worker.Controllers
@@ -25,13 +28,14 @@ namespace Zeebe.Worker.Controllers
         public async Task<DeployResponse> Deploy([FromForm] DeployRequest request)
         {
             await using var memoryStream = new MemoryStream();
-            await request.FileContent.OpenReadStream().CopyToAsync(memoryStream);
+            var (fileContent, fileName, fileType) = request;
+            await fileContent.OpenReadStream().CopyToAsync(memoryStream);
             var bindingRequest = new BindingRequest("workflow", "deploy")
             {
                 Data = memoryStream.ToArray().AsMemory()
             };
-            bindingRequest.Metadata.Add("fileName", request.FileName);
-            if (request.FileType != null) bindingRequest.Metadata.Add("fileType", request.FileType);
+            bindingRequest.Metadata.Add("fileName", fileName);
+            if (fileType != null) bindingRequest.Metadata.Add("fileType", fileType);
 
             var bindingResponse = await _daprClient.InvokeBindingAsync(bindingRequest);
             var responseJson = await JsonSerializer.DeserializeAsync<DeployResponse>(

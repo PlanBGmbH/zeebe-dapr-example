@@ -2,7 +2,7 @@
 
 An example that allows to orchestrate [Dapr] microservices with the [Zeebe] workflow engine.
 
-This example will contain a .NET microservices that will be orchestrated with the [Zeebe] workflow engine. The example will use
+This example contains a .NET microservice that will be orchestrated with the [Zeebe] workflow engine. The example uses
 the new [Dapr input/output bindings](https://docs.dapr.io/developing-applications/building-blocks/bindings/) for Zeebe, which is 
 currently in development. The progress can be monitored in the following repo: https://github.com/akkie/components-contrib/tree/zeebe-bindings/bindings/zeebe
 

@@ -1,19 +1,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Zeebe.Worker.Models
+namespace Zeebe.Worker.Models.Message
 {
-    public class PublishRequest
-    {
-        [Required]
-        public string MessageName { get; set; }
-
-        public string CorrelationKey { get; set; }
-
-        public string MessageId { get; set; }
-
-        public string TimeToLive { get; set; }
-
-        public Dictionary<string, string> Variables { get; set; }
-    }
+    public record PublishRequest(
+        [Required] string MessageName,
+        string CorrelationKey,
+        string MessageId,
+        string TimeToLive,
+        Dictionary<string, string> Variables);
 }
