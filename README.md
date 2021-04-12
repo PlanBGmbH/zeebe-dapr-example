@@ -11,13 +11,21 @@ The repository contains a simple Zeebe [BPMN] process
 
 The microservice contains the following endpoints:
 
-| Endpoint          | Description                                                              |
-|-------------------|--------------------------------------------------------------------------|
-| `workflow/deploy` | Deploys a workflow to the Zeebe workflow engine                          |
-| `workflow/create` | Creates an instance of a deployed workflow in the Zeebe workflow engine  |
-| `workflow/cancel` | Cancels a started workflow instance in the Zeebe workflow engine         |
-| `message/publish` | Publishes a message to the Zeebe workflow engine                         |
-| `calc`            | Worker implementation that will be executed by the Zeebe workflow engine |
+| Endpoint                     | Description                                                              |
+|------------------------------|--------------------------------------------------------------------------|
+| `command/topology`           | Request cluster topology                                                 |
+| `command/deploy-workflow`    | Deploys a workflow                                                       |
+| `command/create-instance`    | Creates an instance of a deployed workflow                               |
+| `command/cancel-instance`    | Cancels a started workflow instance                                      |
+| `command/set-variables`      | Sets new variable for an element (workflow, activity, ...)               |
+| `command/resolve-incident`   | Resolves a job incident                                                  |
+| `command/publish-message`    | Publishes a message                                                      |
+| `command/activate-jobs`      | Activates jobs                                                           |
+| `command/complete-job`       | Completes a job                                                          |
+| `command/fail-job`           | Fails a job                                                              |
+| `command/update-job-retries` | Updates the job retries                                                  |
+| `command/throw-error`        | Throws an error for a job                                                |
+| `calc`                       | Worker implementation that will be executed by the Zeebe workflow engine |
 
 ## Setup Zeebe
 
@@ -129,7 +137,7 @@ Now we are able to access the [Operate] UI over `https://localhost:8443` and log
 
 # Run the worker service
 
-The following command will run the service `Zeebe.Worker` with dapr. The repo contains some example requests in the `requests.http` file, 
+The following command will run the service `Zeebe.Worker` with dapr. The repo contains some example requests in the `requests` folder, 
 which can be executed against the service.
 
 ```bash
