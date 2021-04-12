@@ -1,0 +1,25 @@
+### Start calculation with message
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/publish-message
+Content-Type: application/json
+
+{
+  "messageName": "start-calc",
+  "timeToLive": "1m",
+  "variables": {
+    "operator": "+",
+    "firstOperand": "1",
+    "secondOperand": "1"
+  }
+}
+
+### Finish calculation by sending message with result
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/publish-message
+Content-Type: application/json
+
+{
+  "messageName": "finish-calc",
+  "correlationKey": "2",
+  "timeToLive": "1m"
+}

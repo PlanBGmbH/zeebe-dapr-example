@@ -1,0 +1,20 @@
+﻿### Throw error with mandatory params
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/throw-error
+Content-Type: application/json
+
+{
+  "jobKey": 2251799813685739,
+  "errorCode": "calc-error"
+}
+
+### Throw error with optional params
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/throw-error
+Content-Type: application/json
+
+{
+  "jobKey": 2251799813686172,
+  "errorCode": "calc-error",
+  "errorMessage": "some error occured"
+}

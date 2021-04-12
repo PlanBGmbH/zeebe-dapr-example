@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Zeebe.Worker.Models.Message
+namespace Zeebe.Worker.Models.Command
 {
-    public record PublishRequest(
+    public record PublishMessageRequest(
         [Required] string MessageName,
         string CorrelationKey,
         string MessageId,

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace Zeebe.Worker.Models.Workflow
+namespace Zeebe.Worker.Models.Command
 {
-    public record CreateRequest(
+    public record CreateInstanceRequest(
         string BpmnProcessId,
         long? WorkflowKey,
         short? Version,

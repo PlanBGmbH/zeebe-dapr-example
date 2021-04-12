@@ -1,0 +1,42 @@
+﻿### Create a workflow instance by process ID (latest)
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/create-instance
+Content-Type: application/json
+
+{
+  "bpmnProcessId": "zeebe-test",
+  "variables": {
+    "operator": "+",
+    "firstOperand": "1",
+    "secondOperand": "1"
+  }
+}
+
+### Create a workflow instance by process ID (version 1)
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/create-instance
+Content-Type: application/json
+
+{
+  "bpmnProcessId": "zeebe-test",
+  "version": 1,
+  "variables": {
+    "operator": "+",
+    "firstOperand": "1",
+    "secondOperand": "1"
+  }
+}
+
+### Create a workflow instance by workflow key
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/create-instance
+Content-Type: application/json
+
+{
+  "workflowKey": 2251799813685895,
+  "variables": {
+    "operator": "+",
+    "firstOperand": "1",
+    "secondOperand": "1"
+  }
+}

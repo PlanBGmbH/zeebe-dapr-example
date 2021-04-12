@@ -1,0 +1,6 @@
+﻿POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/cancel-instance
+Content-Type: application/json
+
+{
+  "workflowInstanceKey": 2251799813685946
+}

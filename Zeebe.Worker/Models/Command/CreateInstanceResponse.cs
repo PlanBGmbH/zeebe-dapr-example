@@ -1,6 +1,6 @@
-namespace Zeebe.Worker.Models.Workflow
+namespace Zeebe.Worker.Models.Command
 {
-    public record CreateResponse(
+    public record CreateInstanceResponse(
         long? WorkflowKey,
         string BpmnProcessId,
         short? Version,

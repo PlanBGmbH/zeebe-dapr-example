@@ -1,0 +1,1 @@
+﻿GET http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/topology

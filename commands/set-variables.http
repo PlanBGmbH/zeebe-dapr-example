@@ -1,0 +1,32 @@
+﻿### Set variables
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/set-variables
+Content-Type: application/json
+
+{
+  "elementInstanceKey": 2251799813686003,
+  "variables": {
+    "object": {
+      "foo": "foo",
+      "bar": "bar",
+      "list": ["foo", "bar"]
+    }
+  }
+}
+
+### Set local variables
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/set-variables
+Content-Type: application/json
+
+{
+  "elementInstanceKey": "start-calc",
+  "local": true,
+  "variables": {
+    "object": {
+      "foo": "foo",
+      "bar": "bar",
+      "list": ["foo", "bar"]
+    }
+  }
+}

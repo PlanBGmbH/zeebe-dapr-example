@@ -1,0 +1,18 @@
+﻿### Update job retries with mandatory params (defaults to 3 retries)
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/update-job-retries
+Content-Type: application/json
+
+{
+  "jobKey": 2251799813686172
+}
+
+### Update job retries with optional params
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/update-job-retries
+Content-Type: application/json
+
+{
+  "jobKey": 2251799813686172,
+  "retries": 10
+}

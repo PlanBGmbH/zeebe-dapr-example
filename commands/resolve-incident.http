@@ -1,0 +1,6 @@
+﻿POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/resolve-incident
+Content-Type: application/json
+
+{
+  "incidentKey": 2251799813686123
+}

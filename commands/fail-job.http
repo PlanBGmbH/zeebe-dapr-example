@@ -1,0 +1,20 @@
+﻿### Fail job with mandatory params
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/fail-job
+Content-Type: application/json
+
+{
+  "jobKey": 2251799813685739,
+  "retries": 5
+}
+
+### Fail job with optional params
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/fail-job
+Content-Type: application/json
+
+{
+  "jobKey": 2251799813685739,
+  "retries": 5,
+  "errorMessage": "some error occured"
+}

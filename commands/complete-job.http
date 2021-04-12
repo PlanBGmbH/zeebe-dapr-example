@@ -1,0 +1,24 @@
+﻿### Complete job with mandatory params
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/complete-job
+Content-Type: application/json
+
+{
+  "jobKey": 2251799813685739
+}
+
+### Complete job with optional params
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/complete-job
+Content-Type: application/json
+
+{
+  "jobKey": 2251799813686172,
+  "variables": {
+    "object": {
+      "foo": "foo",
+      "bar": "bar",
+      "list": ["foo", "bar"]
+    }
+  }
+}

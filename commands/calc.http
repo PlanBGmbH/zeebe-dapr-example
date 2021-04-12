@@ -1,0 +1,8 @@
+﻿POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/calc
+Content-Type: application/json
+
+{
+  "operator": "+",
+  "firstOperand": 1.1,
+  "secondOperand": 2.4
+}

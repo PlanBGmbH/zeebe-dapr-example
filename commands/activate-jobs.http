@@ -1,0 +1,26 @@
+﻿### Activate jobs with mandatory params
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/activate-jobs
+Content-Type: application/json
+
+{
+  "jobType": "calc",
+  "maxJobsToActivate": 5
+}
+
+### Activate jobs with optional params
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/activate-jobs
+Content-Type: application/json
+
+{
+  "jobType": "calc",
+  "maxJobsToActivate": 5,
+  "timeout": "5s",
+  "workerName": "calc",
+  "fetchVariables": [
+    "operator",
+    "firstOperand",
+    "secondOperand"
+  ]
+}
