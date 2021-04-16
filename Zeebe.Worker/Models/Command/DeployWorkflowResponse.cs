@@ -6,7 +6,7 @@ namespace Zeebe.Worker.Models.Command
 
     public record WorkflowMetadata(
         string BpmnProcessId,
-        short Version,
+        int Version,
         long WorkflowKey,
         string ResourceName);
 }

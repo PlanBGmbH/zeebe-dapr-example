@@ -4,20 +4,20 @@ namespace Zeebe.Worker.Models.Command
 {
     public record TopologyResponse(
         IList<BrokerInfo> Brokers,
-        short? ClusterSize,
-        short? PartitionsCount,
-        short? ReplicationFactor,
+        int? ClusterSize,
+        int? PartitionsCount,
+        int? ReplicationFactor,
         string GatewayVersion);
 
     public record BrokerInfo(
-        short? NodeId,
+        int? NodeId,
         string Host,
-        short? Port,
+        int? Port,
         IList<Partition> Partitions,
         string Version);
 
     public record Partition(
-        short? PartitionId,
-        short? Role,
-        short? Health);
+        int? PartitionId,
+        int? Role,
+        int? Health);
 }

@@ -5,7 +5,7 @@ namespace Zeebe.Worker.Models.Command
 {
     public record ActivateJobsRequest(
         [Required] string JobType,
-        [Required] short? MaxJobsToActivate,
+        [Required] int? MaxJobsToActivate,
         string Timeout,
         string WorkerName,
         IList<string> FetchVariables);

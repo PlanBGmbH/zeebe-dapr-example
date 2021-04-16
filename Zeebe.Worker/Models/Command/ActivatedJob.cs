@@ -5,13 +5,13 @@
         string Type,
         long WorkflowInstanceKey,
         string BpmnProcessId,
-        short WorkflowDefinitionVersion,
+        int WorkflowDefinitionVersion,
         long WorkflowKey,
         string ElementId,
         long ElementInstanceKey,
         string CustomHeaders,
         string Worker,
-        short Retries,
+        int Retries,
         long Deadline,
         string Variables);
 }
