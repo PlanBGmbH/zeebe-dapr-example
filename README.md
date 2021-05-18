@@ -1,23 +1,23 @@
 # Zeebe Dapr Example
 
-An example that allows to orchestrate [Dapr] microservices with the [Zeebe] workflow engine.
+An example that allows to orchestrate [Dapr] microservices with the [Zeebe] process engine.
 
-This example contains a .NET microservice that will be orchestrated with the [Zeebe] workflow engine. The example uses
-the new [Dapr input/output bindings](https://docs.dapr.io/developing-applications/building-blocks/bindings/) for Zeebe, which is 
-currently in development. The progress can be monitored in the following repo: https://github.com/akkie/components-contrib/tree/zeebe-bindings/bindings/zeebe
+This example contains a .NET microservice that will be orchestrated with the [Zeebe] process engine. The example uses
+the new [Dapr input/output bindings](https://docs.dapr.io/developing-applications/building-blocks/bindings/) for Zeebe, 
+which will bew released with Dapr version 1.2.
 
 The repository contains a simple Zeebe [BPMN] process
-![Alt text](workflow.png?raw=true "Calc workflow")
+![Alt text](process.png?raw=true "Calc process")
 
 The microservice contains the following endpoints:
 
 | Endpoint                     | Description                                                              |
 |------------------------------|--------------------------------------------------------------------------|
 | `command/topology`           | Request cluster topology                                                 |
-| `command/deploy-workflow`    | Deploys a workflow                                                       |
-| `command/create-instance`    | Creates an instance of a deployed workflow                               |
-| `command/cancel-instance`    | Cancels a started workflow instance                                      |
-| `command/set-variables`      | Sets new variable for an element (workflow, activity, ...)               |
+| `command/deploy-process`     | Deploys a process                                                        |
+| `command/create-instance`    | Creates an instance of a deployed process                                |
+| `command/cancel-instance`    | Cancels a started process instance                                       |
+| `command/set-variables`      | Sets new variable for an element (process, activity, ...)                |
 | `command/resolve-incident`   | Resolves a job incident                                                  |
 | `command/publish-message`    | Publishes a message                                                      |
 | `command/activate-jobs`      | Activates jobs                                                           |
@@ -25,7 +25,7 @@ The microservice contains the following endpoints:
 | `command/fail-job`           | Fails a job                                                              |
 | `command/update-job-retries` | Updates the job retries                                                  |
 | `command/throw-error`        | Throws an error for a job                                                |
-| `calc`                       | Worker implementation that will be executed by the Zeebe workflow engine |
+| `calc`                       | Worker implementation that will be executed by the Zeebe process engine  |
 
 ## Setup Zeebe
 

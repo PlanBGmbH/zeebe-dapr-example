@@ -1,4 +1,4 @@
-﻿### Create a workflow instance by process ID (latest)
+﻿### Create a process instance by process ID (latest)
 
 POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/create-instance
 Content-Type: application/json
@@ -12,7 +12,7 @@ Content-Type: application/json
   }
 }
 
-### Create a workflow instance by process ID (version 1)
+### Create a process instance by process ID (version 1)
 
 POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/create-instance
 Content-Type: application/json
@@ -27,13 +27,13 @@ Content-Type: application/json
   }
 }
 
-### Create a workflow instance by workflow key
+### Create a process instance by process definition key
 
 POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/create-instance
 Content-Type: application/json
 
 {
-  "workflowKey": 2251799813685895,
+  "processDefinitionKey": 2251799813685276,
   "variables": {
     "operator": "+",
     "firstOperand": "1",

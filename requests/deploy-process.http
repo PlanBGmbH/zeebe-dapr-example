@@ -1,0 +1,16 @@
+﻿### Deploy a process file
+
+POST http://localhost:5001/v1.0/invoke/zeebe-worker/method/command/deploy-process
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="fileContent"; filename="process.bpmn"
+
+< ../process.bpmn
+--WebAppBoundary--
+
+--WebAppBoundary
+Content-Disposition: form-data; name="fileName"
+
+process.bpmn
+--WebAppBoundary--

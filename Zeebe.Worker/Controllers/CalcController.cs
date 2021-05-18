@@ -12,7 +12,7 @@ namespace Zeebe.Worker.Controllers
     {
         /// <summary>
         /// This action gets called from the Zeebe Dapr binding for each calc job that is executed inside
-        /// the Zeebe workflow engine.
+        /// the Zeebe process engine.
         /// </summary>
         [HttpPost("/calc")]
         public CalcResponse Calc([FromBody] CalcRequest request)

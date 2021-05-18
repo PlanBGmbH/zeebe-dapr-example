@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace Zeebe.Worker.Models.Command
 {
-    public record DeployWorkflowResponse(long Key, IList<WorkflowMetadata> Workflows);
+    public record DeployProcessResponse(long Key, IList<ProcessMetadata> Processes);
 
-    public record WorkflowMetadata(
+    public record ProcessMetadata(
         string BpmnProcessId,
         int Version,
-        long WorkflowKey,
+        long ProcessDefinitionKey,
         string ResourceName);
 }

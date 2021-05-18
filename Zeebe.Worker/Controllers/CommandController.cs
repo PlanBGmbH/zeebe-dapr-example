@@ -32,13 +32,13 @@ namespace Zeebe.Worker.Controllers
             return await _daprClient.InvokeBindingAsync<object, TopologyResponse>("command", Commands.Topology, new {});
         }
 
-        [HttpPost(Commands.DeployWorkflow)]
-        public async Task<DeployWorkflowResponse> DeployWorkflow([FromForm] DeployWorkflowRequest request)
+        [HttpPost(Commands.DeployProcess)]
+        public async Task<DeployProcessResponse> DeployProcess([FromForm] DeployProcessRequest request)
         {
             await using var memoryStream = new MemoryStream();
             var (fileContent, fileName, fileType) = request;
             await fileContent.OpenReadStream().CopyToAsync(memoryStream);
-            var bindingRequest = new BindingRequest("command", Commands.DeployWorkflow)
+            var bindingRequest = new BindingRequest("command", Commands.DeployProcess)
             {
                 Data = memoryStream.ToArray().AsMemory()
             };
@@ -46,7 +46,7 @@ namespace Zeebe.Worker.Controllers
             if (fileType != null) bindingRequest.Metadata.Add("fileType", fileType);
 
             var bindingResponse = await _daprClient.InvokeBindingAsync(bindingRequest);
-            var responseJson = await JsonSerializer.DeserializeAsync<DeployWorkflowResponse>(
+            var responseJson = await JsonSerializer.DeserializeAsync<DeployProcessResponse>(
                 bindingResponse.Data.AsStream(), SerializerOptions.Json);
 
             return responseJson;
@@ -55,9 +55,9 @@ namespace Zeebe.Worker.Controllers
         [HttpPost(Commands.CreateInstance)]
         public async Task<ActionResult> CreateInstance([FromBody] CreateInstanceRequest request)
         {
-            if (request.BpmnProcessId == null && request.WorkflowKey == null)
+            if (request.BpmnProcessId == null && request.ProcessDefinitionKey == null)
             {
-                return BadRequest(new { error = "Either a bpmnProcessId or a workflowKey must be given" });
+                return BadRequest(new { error = "Either a bpmnProcessId or a processDefinitionKey must be given" });
             }
 
             var result = await _daprClient.InvokeBindingAsync<CreateInstanceRequest, CreateInstanceResponse>(

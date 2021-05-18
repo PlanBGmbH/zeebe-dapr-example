@@ -3,7 +3,7 @@
     public static class Commands
     {
         public const string Topology = "topology";
-        public const string DeployWorkflow = "deploy-workflow";
+        public const string DeployProcess = "deploy-process";
         public const string CreateInstance = "create-instance";
         public const string CancelInstance = "cancel-instance";
         public const string SetVariables = "set-variables";

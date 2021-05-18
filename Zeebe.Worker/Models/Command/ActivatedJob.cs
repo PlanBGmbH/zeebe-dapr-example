@@ -3,10 +3,10 @@
     public record ActivatedJob(
         long? Key,
         string Type,
-        long WorkflowInstanceKey,
+        long ProcessInstanceKey,
         string BpmnProcessId,
-        int WorkflowDefinitionVersion,
-        long WorkflowKey,
+        int ProcessDefinitionVersion,
+        long ProcessDefinitionKey,
         string ElementId,
         long ElementInstanceKey,
         string CustomHeaders,
