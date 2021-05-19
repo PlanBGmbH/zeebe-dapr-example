@@ -6,6 +6,5 @@ namespace Zeebe.Worker.Models.Command
 {
     public record DeployProcessRequest(
         [Required] IFormFile FileContent,
-        [Required] string FileName,
-        string FileType);
+        [Required] string FileName);
 }

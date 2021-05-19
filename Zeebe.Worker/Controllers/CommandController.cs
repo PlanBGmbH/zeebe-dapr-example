@@ -36,14 +36,13 @@ namespace Zeebe.Worker.Controllers
         public async Task<DeployProcessResponse> DeployProcess([FromForm] DeployProcessRequest request)
         {
             await using var memoryStream = new MemoryStream();
-            var (fileContent, fileName, fileType) = request;
+            var (fileContent, fileName) = request;
             await fileContent.OpenReadStream().CopyToAsync(memoryStream);
             var bindingRequest = new BindingRequest("command", Commands.DeployProcess)
             {
                 Data = memoryStream.ToArray().AsMemory()
             };
             bindingRequest.Metadata.Add("fileName", fileName);
-            if (fileType != null) bindingRequest.Metadata.Add("fileType", fileType);
 
             var bindingResponse = await _daprClient.InvokeBindingAsync(bindingRequest);
             var responseJson = await JsonSerializer.DeserializeAsync<DeployProcessResponse>(
