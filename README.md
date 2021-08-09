@@ -4,8 +4,7 @@ An example that allows to orchestrate [Dapr] microservices with the [Zeebe] proc
 
 This example contains a .NET microservice that will be orchestrated with the [Zeebe] process engine. The example uses
 the new [Dapr input/output bindings](https://docs.dapr.io/developing-applications/building-blocks/bindings/) for Zeebe, 
-which will be released with Dapr version 1.2. To get this working, you need to compile dapr with the latest 
-[Update Zeebe to version 1.0](https://github.com/dapr/components-contrib/pull/876) branch.
+which were released with Dapr version 1.2.
 
 The repository contains a simple Zeebe [BPMN] process
 ![Alt text](process.png?raw=true "Calc process")
