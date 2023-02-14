@@ -1,4 +1,3 @@
-namespace Zeebe.Worker.Models.Command
-{
-    public record PublishMessageResponse(long Key);
-}
+namespace Zeebe.Worker.Models.Command;
+
+public record PublishMessageResponse(long Key);

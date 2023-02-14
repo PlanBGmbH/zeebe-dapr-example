@@ -1,4 +1,3 @@
-namespace Zeebe.Worker.Models
-{
-    public record CalcResponse(double Result);
-}
+namespace Zeebe.Worker.Models;
+
+public record CalcResponse(double Result);

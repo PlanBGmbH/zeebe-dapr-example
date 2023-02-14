@@ -1,14 +1,13 @@
 using System.Text.Json;
 
-namespace Zeebe.Worker.Utils
+namespace Zeebe.Worker.Utils;
+
+public static class SerializerOptions
 {
-    public static class SerializerOptions
+    public static JsonSerializerOptions Json => new()
     {
-        public static JsonSerializerOptions Json => new()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            PropertyNameCaseInsensitive = true,
-            IgnoreNullValues = true,
-        };
-    }
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        PropertyNameCaseInsensitive = true,
+        IgnoreNullValues = true,
+    };
 }
