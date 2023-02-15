@@ -3,11 +3,12 @@
 An example that allows to orchestrate [Dapr] microservices with the [Zeebe] process engine.
 
 This example contains a .NET microservice that will be orchestrated with the [Zeebe] process engine. The example uses
-the Dapr [input](https://docs.dapr.io/reference/components-reference/supported-bindings/zeebe-jobworker/)/
-[output](https://docs.dapr.io/reference/components-reference/supported-bindings/zeebe-command/) bindings for Zeebe.
+the Dapr [input](https://docs.dapr.io/reference/components-reference/supported-bindings/zeebe-jobworker/)/[output](https://docs.dapr.io/reference/components-reference/supported-bindings/zeebe-command/) bindings for Zeebe.
 
-The repository contains a simple Zeebe [BPMN] process
+The repository contains a simple Zeebe [BPMN] process:
 ![Alt text](process.png?raw=true "Calc process")
+
+The process can be viewed or edited with either the web based tooling from [BPMN.IO] or you can download the [Desktop Modeler].
 
 The microservice contains the following endpoints:
 
@@ -44,12 +45,16 @@ git clone https://github.com/camunda/camunda-platform.git
 docker compose -f docker-compose-core.yaml up
 ```
 
+**Note:** If you try to run this example on a M1 Mac, then you need to update the zeebe, operate and tasklist images to version 8.2.0-alpha4. 
+You also needs to remove the connector part from the docker compose file.
+
 After all services are started the following URIs can be used:
 
-| Tool                   | URI                   |
-|------------------------|-----------------------|
-| Operate                | http://localhost:8081 |
-| Zeebe Gateway          | localhost:26500       |
+| Tool          | URI                   |
+|---------------|-----------------------|
+| Operate       | http://localhost:8081 |
+| Tasklist      | http://localhost:8082 |
+| Zeebe Gateway | localhost:26500       |
 
 The default username and password is: `demo`
 
@@ -61,7 +66,6 @@ which can be executed against the service.
 ```bash
 dotnet run --project "./Zeebe.Worker/Zeebe.Worker.csproj"
 ```
-
 [BPMN]: https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation
 [Zeebe]: https://camunda.com/platform/zeebe/
 [camunda-platform]: https://github.com/camunda/camunda-platform
@@ -71,3 +75,5 @@ dotnet run --project "./Zeebe.Worker/Zeebe.Worker.csproj"
 [Docker]: https://www.docker.com/
 [Docker Compose]: https://docs.docker.com/compose/
 [Docker Desktop]: https://docs.docker.com/docker-for-windows/install/
+[BPMN.IO]: https://bpmn.io/
+[Desktop Modeler]: https://camunda.com/de/download/modeler/
